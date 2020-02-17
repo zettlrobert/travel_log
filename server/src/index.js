@@ -1,12 +1,11 @@
 //Envoirment Variables
 const dotenv = require('dotenv');
-
-dotenv.config({
-  path: './config/config.env'
-});
-
 const express = require('express');
 const connectDB = require('./config/database');
+
+dotenv.config({
+  path: `${__dirname}/config/config.env`
+})
 
 
 // Middleware
@@ -46,7 +45,7 @@ app.get('/', (req, res) => {
 
 
 //Routes
-app.use('api/logs', logs);
+app.use('/api/logs', logs);
 
 
 
