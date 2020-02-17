@@ -33,6 +33,8 @@ app.use(cors({
 }));
 
 
+// JSON Body Parsing Middleware
+app.use(express.json()); // pody parser is bundled with express now
 
 
 // Basic Routes, JSON App, response with JSON Objects
