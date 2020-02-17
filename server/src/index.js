@@ -5,10 +5,11 @@ const morgan = require('morgan'); // Logger that logs all incomming requests
 const helmet = require('helmet'); // Automatically adjust Headers for Security
 const cors = require('cors'); // Cross Orignin Ressource Sharing Header --> Any Oringin can request form our Backend
 
+const errorHandling = require('./errorHanlderMiddleware'); // My Error Handlers
+
 
 
 const port = process.env.PORT || 3000
-
 
 
 const app = express();
@@ -28,25 +29,8 @@ app.get('/', (req, res) => {
 
 
 
-// Creates not Found Error
-// Sets statuscode 404
-app.use((req, res, next) => {
-  const error = new Error(`Not Found - §{req.originalUrl}`);
-  res.status(404);
-  next(error);
-});
-
-// Error handling middleware
-app.use((error, req, res, next) => {
-  // if we make it here statusCode is 404 - if it is 200 some other route error occured
-  const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
-  res.status(statusCode);
-  res.json({
-    message: error.message,
-    stack: process.env.NODE_ENV === 'production' ? 'Untraceable' : error.stack,
-  })
-});
-
+app.use(errorHandling.notFound);
+app.use(errorHandling.errorHandler);
 
 
 app.listen(port, () => {
