@@ -23,8 +23,16 @@ const LogEntrySchema = new Schema({
     max: 10,
     default: 0
   },
-  latitude: requiredNumber,
-  longitude: requiredNumber,
+  latitude: {
+    ...requiredNumber,
+    min: -90,
+    max: 90,
+  },
+  longitude: {
+    ...requiredNumber,
+    min: -180,
+    max: 180,
+  },
   visitDate: {
     required: true,
     type: Date,
@@ -32,3 +40,7 @@ const LogEntrySchema = new Schema({
 }, {
   timestamps: true
 });
+
+const LogEntry = mongoose.model('LogEntry', LogEntrySchema)
+
+module.exports = LogEntry;
