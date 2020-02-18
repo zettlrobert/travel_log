@@ -16,18 +16,18 @@ const App = () => {
     zoom: 5
   });
 
+  const getEntries = async () => {
+    const logEntries = await listLogEntries();
+    setLogEntries(logEntries);
+    console.log(logEntries);
+  }
+
   useEffect(() => {
-    (async () => {
-      const logEntries = await listLogEntries();
-      setLogEntries(logEntries);
-      console.log(logEntries);
-    })();
+    getEntries();
+
+  }, []);
 
 
-    return () => {
-      // cleanup
-    };
-  }, [])
 
 
 
@@ -140,6 +140,10 @@ const App = () => {
               anchor="top" >
               <div className="popup">
                 <LogEntryForm
+                  onClose={() => {
+                    setaddEntryLocation(null);
+                    getEntries();
+                  }}
                   location={addEntryLocation}
                 />
               </div>
