@@ -21,5 +21,25 @@ body {
 }
 
 .popup {
-  max-width: 300px;
+  width: 40vw;
+  font-size: 1.4rem;
+  padding: 1rem;
+ } 
+
+.formButton {
+  border: 1px solid transparent ;
+  width: 100%;
+  padding: 1rem; 
+}
+
+.formButton:hover {
+  border: 1px solid teal;
+  width: 100%;
+  padding: 1rem; 
+}
+
+.entry-form label, .entry-form input, .entry-form textarea{
+  margin: 0.5rem 0rem;
+  display: block;
+  width: 100%;
 }

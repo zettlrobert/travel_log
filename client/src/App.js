@@ -1,8 +1,8 @@
-import React, { useState, useEffect, Fragment } from 'react';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
-
+import React, { useState, useEffect, Fragment } from 'react';
 
 import { listLogEntries } from './API';
+import LogEntryForm from './LogEntryForm'
 
 const App = () => {
   const [logEntries, setLogEntries] = useState([]);
@@ -38,10 +38,10 @@ const App = () => {
     const [longitude, latitude] = event.lngLat;
 
     setaddEntryLocation({
+      latitude,
       longitude,
-      latitude
-    })
-  }
+    });
+  };
 
   return (
     <ReactMapGL
@@ -51,12 +51,9 @@ const App = () => {
       onViewportChange={setViewport}
       onDblClick={showAddMarkerPopup}
     >
-
       {
         logEntries.map(entry => (
-          <Fragment
-            key={entry._id}
-          >
+          <Fragment key={entry._id}>
             <Marker
               latitude={entry.latitude}
               longitude={entry.longitude}
@@ -83,34 +80,30 @@ const App = () => {
                   <circle cx="12" cy="10" r="3"></circle>
                 </svg>
               </div>
-
             </Marker >
-
             {
               showPopup[entry._id] ? (
                 <Popup
                   latitude={entry.latitude}
                   longitude={entry.longitude}
                   closeButton={true}
+                  closeOnClick={false}
                   dynamicPosition={true}
                   onClose={() => setShowPopup({})}
                   anchor="top" >
-                  <div
-                    className="popup"
-                  >
+                  <div className="popup">
                     <h3>{entry.title}</h3>
                     <p>{entry.description}</p>
                     <p>{entry.personalComment}</p>
                     <small>Visited on: {new Date(entry.visitDate).toLocaleDateString()} </small>
+                    {entry.image && <img src={entry.image} alt={entry.title} />}
                   </div>
                 </Popup>
               ) : null
             }
-
           </Fragment>
         ))
       }
-
       {
         addEntryLocation ? (
           <>
@@ -136,25 +129,24 @@ const App = () => {
                   <circle cx="12" cy="10" r="3"></circle>
                 </svg>
               </div>
-
             </Marker >
             <Popup
               latitude={addEntryLocation.latitude}
               longitude={addEntryLocation.longitude}
               closeButton={true}
+              closeOnClick={false}
               dynamicPosition={true}
               onClose={() => setaddEntryLocation(null)}
               anchor="top" >
-              <div
-                className="popup"
-              >
-                <h3>Add new log entry</h3>
+              <div className="popup">
+                <LogEntryForm
+                  location={addEntryLocation}
+                />
               </div>
             </Popup>
           </>
         ) : null
       }
-
     </ReactMapGL >
   );
 }
