@@ -36,7 +36,8 @@ const LogEntrySchema = new Schema({
   visitDate: {
     required: true,
     type: Date,
-  }
+  },
+  image: String
 }, {
   timestamps: true,
 });

@@ -1,7 +1,12 @@
 # Simple Travel Log Fullstack Application
+
+![cover](docs/cover.png)
+
 REST API(JSON), React Frontend, MongoDB
 
-### Dependencies
+## Server
+
+### Dependencies Server
 * express for server
 * cors - express middleware cross orignin ressources
 * morgan - express middleware for logging 
@@ -9,12 +14,10 @@ REST API(JSON), React Frontend, MongoDB
 * mongoose - models for mongodb
 * dotenv - envoirement variables from file
 
-### Dev Dependencies
+### Dev Dependencies Server
 * eslint
 * nodemon
 * eslint --> npx eslint --init
-
-
 
 
 ### Database Entrys
@@ -33,4 +36,6 @@ REST API(JSON), React Frontend, MongoDB
 * Updated - DateTime
 
 
- #### 
+## Client
+* react-map-gl
+* react-hook-form

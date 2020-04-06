@@ -20,8 +20,6 @@ router.get('/', async (req, res, next) => {
 });
 
 
-
-
 // @desc    Create new Log entry
 // @route   POST /api/logs
 // @access  public
