@@ -2,6 +2,7 @@
 
 ![cover](docs/cover.png)
 
+Basic Node Concepts with an example Application. 
 REST API(JSON), React Frontend, MongoDB
 
 ## Server
